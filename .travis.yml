@@ -1,8 +1,12 @@
 language: csharp
+solution: Core.sln
 notifications:
   email:
     on_success: never
     on_failure: always
     on_pull_requests: false
 install:
+  - nuget restore Core.sln
 script:
+  - xbuild /p:Configuration=Release Core.sln
+  - mono ./packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./CoreTests/bin/Release/CoreTests.dll
