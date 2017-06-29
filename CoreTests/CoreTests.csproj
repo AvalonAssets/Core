@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Extension\EnumExtensionTest.cs" />
+    <Compile Include="Extension\ListExtensionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
