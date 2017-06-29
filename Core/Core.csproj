@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Extension\DoubleExtension.cs" />
     <Compile Include="Extension\EnumExtension.cs" />
-    <Compile Include="Extension\ListExtension.cs" />
     <Compile Include="Extension\StrinigExtension.cs" />
     <Compile Include="Log\ConsoleLogger.cs" />
     <Compile Include="Log\FrameLogger.cs" />
