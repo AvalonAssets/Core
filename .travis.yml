@@ -9,4 +9,4 @@ install:
   - nuget restore Core.sln
 script:
   - xbuild /p:Configuration=Release Core.sln
-  - mono ./packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./CoreTests/bin/Release/CoreTests.dll
+  - mono ./packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./CoreTests/bin/Release/AvalonAssets.CoreTests.dll
