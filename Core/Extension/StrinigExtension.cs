@@ -5,7 +5,16 @@ namespace AvalonAssets.Core.Extension
 {
     public static class StrinigExtension
     {
-        public static string Wrap(this string source, int wrapLength, string lineBreak, bool wrapLong = true)
+        /// <summary>
+        ///     Wrap the string to given length.
+        /// </summary>
+        /// <param name="source">Source string.</param>
+        /// <param name="wrapLength">Maximun length.</param>
+        /// <param name="lineBreak">Line break character(s).</param>
+        /// <param name="wrapLong">Wrap the word that is longer than <paramref name="wrapLength" /> even if there is no space.</param>
+        /// <returns>Wrapped string.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="wrapLength" /> less than 1.</exception>
+        public static string Wrap(this string source, int wrapLength, string lineBreak = null, bool wrapLong = true)
         {
             if (wrapLength < 1)
                 throw new ArgumentOutOfRangeException($"{nameof(wrapLength)} less than 1.");
@@ -52,11 +61,21 @@ namespace AvalonAssets.Core.Extension
             return wrapped.ToString();
         }
 
-        public static string Wrap(this string source, int wrapLength, bool wrapLong = true)
-        {
-            return source.Wrap(wrapLength, null, wrapLong);
-        }
-
+        /// <summary>
+        ///     Retrieves a substring from this instance.
+        ///     The substring starts at a specified character position and ends at a specified character position.
+        /// </summary>
+        /// <param name="source">Source string.</param>
+        /// <param name="startIndex">Start index.</param>
+        /// <param name="endIndex">End index.</param>
+        /// <returns>
+        ///     A substring from this instance with given <paramref name="startIndex" /> and <paramref name="endIndex" />.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     <paramref name="startIndex" /> or <paramref name="endIndex" /> less than 0 or greater than the length of the source
+        ///     string.
+        /// </exception>
+        /// <exception cref="ArgumentException"><paramref name="endIndex" /> less than <paramref name="startIndex" />.</exception>
         public static string Range(this string source, int startIndex, int endIndex)
         {
             if (startIndex < 0 || startIndex >= source.Length)
@@ -64,7 +83,7 @@ namespace AvalonAssets.Core.Extension
             if (endIndex < 0 || endIndex >= source.Length)
                 throw new ArgumentOutOfRangeException(nameof(endIndex));
             if (endIndex < startIndex)
-                throw new ArgumentOutOfRangeException($"{nameof(endIndex)} less than {nameof(startIndex)}");
+                throw new ArgumentException($"{nameof(endIndex)} less than {nameof(startIndex)}");
             var length = endIndex - startIndex;
             return source.Substring(startIndex, length);
         }

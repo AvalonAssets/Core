@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace AvalonAssets.Core.Event.EventHandler
+{
+    /// <summary>
+    ///     Implementation of <see cref="IEventHandler" />.
+    ///     Uses weak reference to hold the reference to subscriber.
+    /// </summary>
+    internal abstract class WeakReferenceEventHandler : IEventHandler
+    {
+        private readonly WeakReference _weakReference;
+
+        protected WeakReferenceEventHandler(ISubscriber subscriber)
+        {
+            _weakReference = new WeakReference(subscriber);
+        }
+
+        /// <inheritdoc />
+        public bool Alive => _weakReference.Target != null;
+
+        /// <inheritdoc />
+        public abstract IEnumerable<Type> Types { get; }
+
+        /// <inheritdoc />
+        public bool Matches(object instance)
+        {
+            return _weakReference.Target == instance;
+        }
+
+        /// <inheritdoc />
+        public bool Handle(Type messageType, object message)
+        {
+            if (!Alive)
+                return false;
+            foreach (var type in Types)
+                if (type.IsAssignableFrom(messageType))
+                    HandleMessage(type, _weakReference.Target, message);
+            return true;
+        }
+
+        protected abstract void HandleMessage(Type handlerType, object target, object message);
+    }
+}

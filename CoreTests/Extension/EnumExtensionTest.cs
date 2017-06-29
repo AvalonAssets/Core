@@ -15,9 +15,9 @@ namespace AvalonAssets.CoreTests.Extension
         public void ShiftTest()
         {
             var enums = new[] {TestEnum.A, TestEnum.B, TestEnum.C};
-            CollectionAssert.AreEqual(new[] { TestEnum.B, TestEnum.C, TestEnum.A },
+            CollectionAssert.AreEqual(new[] {TestEnum.B, TestEnum.C, TestEnum.A},
                 enums.Shift(1));
-            CollectionAssert.AreEqual(new[] {  TestEnum.C, TestEnum.A, TestEnum.B },
+            CollectionAssert.AreEqual(new[] {TestEnum.C, TestEnum.A, TestEnum.B},
                 enums.Shift(5));
         }
 

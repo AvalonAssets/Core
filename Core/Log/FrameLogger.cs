@@ -83,7 +83,7 @@ namespace AvalonAssets.Core.Log
                 var exceptionSource = exception.Source;
                 if (!string.IsNullOrWhiteSpace(exceptionSource))
                     foreach (var entry in _style.CreateEntries($"Source: {exceptionSource}"))
-                    yield return entry;
+                        yield return entry;
                 yield return _style.CreateInnerWall();
                 foreach (var entry in _style.CreateEntries($"StackTrace: {exception.StackTrace}"))
                     yield return entry;

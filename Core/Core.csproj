@@ -40,6 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Event\BasicEventBus.cs" />
+    <Compile Include="Event\EventHandler\EventHandlerExtension.cs" />
+    <Compile Include="Event\EventHandler\IEventHandlerFactory.cs" />
+    <Compile Include="Event\EventHandler\LambdaEventHandlerFactory.cs" />
+    <Compile Include="Event\EventHandler\ReflectEventHandlerFactory.cs" />
+    <Compile Include="Event\IEvent.cs" />
+    <Compile Include="Event\EventHandler\WeakReferenceEventHandler.cs" />
+    <Compile Include="Event\IEventBus.cs" />
+    <Compile Include="Event\EventHandler\IEventHandler.cs" />
+    <Compile Include="Event\ISubscriber.cs" />
+    <Compile Include="Event\EventHandler\LambdaEventHandler.cs" />
+    <Compile Include="Event\EventHandler\ReflectEventHandler.cs" />
     <Compile Include="Extension\DoubleExtension.cs" />
     <Compile Include="Extension\EnumExtension.cs" />
     <Compile Include="Extension\StrinigExtension.cs" />
@@ -51,6 +63,7 @@
     <Compile Include="Log\LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
