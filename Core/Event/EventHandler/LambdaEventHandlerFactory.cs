@@ -1,19 +1,12 @@
 ﻿namespace AvalonAssets.Core.Event.EventHandler
 {
     /// <summary>
-    ///     <para>
-    ///         Wraps <see cref="ISubscriber{T}" /> to <see cref="IEventHandler" /> with weak reference.
-    ///     </para>
+    ///     <see cref="LambdaEventHandlerFactory" /> wraps <see cref="ISubscriber{T}" /> to <see cref="IEventHandler" />.
+    ///     Uses lambda to find avaiable type and weak reference to handle subscriber.
     /// </summary>
     public class LambdaEventHandlerFactory : IEventHandlerFactory
     {
-        /// <summary>
-        ///     <para>
-        ///         Initializes a new instance of <see cref="IEventHandler" /> with <paramref name="subscriber" />.
-        ///     </para>
-        /// </summary>
-        /// <param name="subscriber">Object that want to subscribe.</param>
-        /// <returns>New instance of <see cref="IEventHandler" />.</returns>
+        /// <inheritdoc />
         public IEventHandler Create(ISubscriber subscriber)
         {
             return new LambdaEventHandler(subscriber);

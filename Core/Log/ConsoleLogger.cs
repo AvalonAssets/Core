@@ -2,8 +2,12 @@
 
 namespace AvalonAssets.Core.Log
 {
+    /// <summary>
+    ///     <see cref="ConsoleLogger" /> log the message to console output.
+    /// </summary>
     public class ConsoleLogger : ILogger, IPrefixLogger
     {
+        /// <inheritdoc />
         public void Log(LogLevel logLevel, string tag, string message, Exception exception)
         {
             var now = DateTime.Now;
@@ -13,6 +17,7 @@ namespace AvalonAssets.Core.Log
                 Console.WriteLine($"{now:s}:[{tag}]({logLevel}): {exception}");
         }
 
+        /// <inheritdoc />
         public int CalculatePrefixLenght(LogLevel logLevel, string tag)
         {
             var now = DateTime.Now;

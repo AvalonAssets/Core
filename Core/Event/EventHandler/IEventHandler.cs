@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace AvalonAssets.Core.Event.EventHandler
 {
     /// <summary>
-    ///     <see cref="IEventHandler" /> handles the reference between the object and the <see cref="Type" />.
-    ///     It is used for <see cref="IEventBus" />.
+    ///     <see cref="IEventHandler" /> handles the reference of <see cref="ISubscriber" /> and extracts metadata from it.
     /// </summary>
+    /// <seealso cref="IEventHandlerFactory" />
     public interface IEventHandler
     {
         /// <summary>
@@ -16,15 +16,15 @@ namespace AvalonAssets.Core.Event.EventHandler
         bool Alive { get; }
 
         /// <summary>
-        ///     Gets All the <see cref="Type" /> that can handle by <see cref="IEventHandler" />.
+        ///     Gets All the <see cref="Type" /> that can handle by this <see cref="IEventHandler" />.
         /// </summary>
-        /// <returns>All type the <see cref="IEventHandler" /> that can handle.</returns>
+        /// <returns>All <see cref="Type" /> that this <see cref="IEventHandler" /> that can handle.</returns>
         IEnumerable<Type> Types { get; }
 
         /// <summary>
-        ///     Check if <paramref name="instance" /> equals to its reference object.
+        ///     Check if <paramref name="instance" /> equals to its <see cref="ISubscriber" />.
         /// </summary>
-        /// <param name="instance">Object.</param>
+        /// <param name="instance">Object to be checked.</param>
         /// <returns>True if this handler is wraping <paramref name="instance" />.</returns>
         bool Matches(object instance);
 

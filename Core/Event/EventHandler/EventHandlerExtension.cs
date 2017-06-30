@@ -3,17 +3,10 @@ using System.Linq;
 
 namespace AvalonAssets.Core.Event.EventHandler
 {
-    /// <summary>
-    ///     <para>
-    ///         <see cref="EventHandlerExtension" /> provides extension methods for <see cref="IEventHandler" />.
-    ///     </para>
-    /// </summary>
-    internal static class EventHandlerExtension
+    public static class EventHandlerExtension
     {
         /// <summary>
-        ///     <para>
-        ///         Handles <paramref name="message" /> of type <typeparamref name="T" />.
-        ///     </para>
+        ///     Handles <paramref name="message" /> of type <typeparamref name="T" />.
         /// </summary>
         /// <typeparam name="T">Message type.</typeparam>
         /// <param name="handler">Handler.</param>
@@ -26,9 +19,7 @@ namespace AvalonAssets.Core.Event.EventHandler
         }
 
         /// <summary>
-        ///     <para>
-        ///         Checks if <paramref name="handler" /> can handle message of <typeparamref name="T" />.
-        ///     </para>
+        ///     Checks if <paramref name="handler" /> can handle message of <typeparamref name="T" />.
         /// </summary>
         /// <typeparam name="T">Message type.</typeparam>
         /// <param name="handler">Handler.</param>
@@ -40,9 +31,7 @@ namespace AvalonAssets.Core.Event.EventHandler
         }
 
         /// <summary>
-        ///     <para>
-        ///         Checks if <paramref name="handler" /> can handle message of <paramref name="messageType" />.
-        ///     </para>
+        ///     Checks if <paramref name="handler" /> can handle message of <paramref name="messageType" />.
         /// </summary>
         /// <param name="handler">Handler.</param>
         /// <param name="messageType">Message type.</param>

@@ -33,12 +33,16 @@ namespace AvalonAssets.Core.Event.EventHandler
         {
             if (!Alive)
                 return false;
-            foreach (var type in Types)
-                if (type.IsAssignableFrom(messageType))
-                    HandleMessage(type, _weakReference.Target, message);
+            HandleMessage(messageType, _weakReference.Target, message);
             return true;
         }
 
+        /// <summary>
+        ///     Notify message to subscriber.
+        /// </summary>
+        /// <param name="handlerType">Message type.</param>
+        /// <param name="target">Subscriber</param>
+        /// <param name="message">Message to be handle.</param>
         protected abstract void HandleMessage(Type handlerType, object target, object message);
     }
 }

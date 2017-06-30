@@ -55,12 +55,10 @@ namespace AvalonAssets.CoreTests.Event
         {
             _eventBus.Subscribe(_intIListSubscriber);
             _eventBus.Subscribe(_intListSubscriber);
-
             var listEventStub = Substitute.For<IEvent<List<int>>>();
             _eventBus.Publish(listEventStub);
             _intIListSubscriber.DidNotReceive().Receive(listEventStub);
             _intListSubscriber.Received().Receive(listEventStub);
-
             var iListEventStub = Substitute.For<IEvent<IList<int>>>();
             _eventBus.Publish(iListEventStub);
             _intIListSubscriber.Received().Receive(iListEventStub);
@@ -70,11 +68,9 @@ namespace AvalonAssets.CoreTests.Event
         public void SubscribeUnScbscribeTest()
         {
             _eventBus.Subscribe(_intIListSubscriber);
-
             var iListEventStub = Substitute.For<IEvent<IList<int>>>();
             _eventBus.Publish(iListEventStub);
             _intIListSubscriber.Received().Receive(iListEventStub);
-
             _eventBus.Unsubscribe(_intIListSubscriber);
             var iListEventStub2 = Substitute.For<IEvent<IList<int>>>();
             _eventBus.Publish(iListEventStub2);

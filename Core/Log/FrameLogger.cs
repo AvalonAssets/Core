@@ -6,21 +6,53 @@ using AvalonAssets.Core.Extension;
 
 namespace AvalonAssets.Core.Log
 {
+    /// <summary>
+    ///     <see cref="FrameLogger" /> is <see cref="ILogger" /> decorator which format the output of log.
+    ///     Also, if the logger implements <see cref="IPrefixLogger" /> prevent logging multiple message.
+    ///     You can use different <see cref="Style" /> for different look of the frame.
+    /// </summary>
+    /// <example>
+    ///     <see cref="ConsoleLogger" />:
+    ///     <code>
+    /// 2017-01-01T00:00:00:[Tag](Error): Message
+    ///      </code>
+    ///     <see cref="ConsoleLogger" /> with <see cref="FrameLogger" />:
+    ///     <code>
+    /// 2017-06-30T14:06:17:[Tag](Error): ╔════════════════════════════════════════════════════╗
+    ///                                   ║ Tag: Tag                                           ║
+    ///                                   ║ Level: Error                                       ║
+    ///                                   ╟────────────────────────────────────────────────────╢
+    ///                                   ║ Message                                            ║
+    ///                                   ╚════════════════════════════════════════════════════╝
+    ///      </code>
+    /// </example>
     public class FrameLogger : ILogger
     {
         private readonly ILogger _logger;
         private readonly Style _style;
 
+        /// <summary>
+        ///     Create a new instance of <see cref="FrameLogger" /> with <paramref name="logger" />
+        ///     and default <see cref="Style" />.
+        /// </summary>
+        /// <param name="logger">Logger.</param>
         public FrameLogger(ILogger logger) : this(logger, new Style())
         {
         }
 
+        /// <summary>
+        ///     Create a new instance of <see cref="FrameLogger" /> with <paramref name="logger" />
+        ///     and given <see cref="Style" />.
+        /// </summary>
+        /// <param name="logger">Logger.</param>
+        /// <param name="style">Format style.</param>
         public FrameLogger(ILogger logger, Style style)
         {
             _logger = logger;
             _style = style;
         }
 
+        /// <inheritdoc />
         public void Log(LogLevel logLevel, string tag, string message, Exception exception)
         {
             var entries = LogEntries(logLevel, tag, message, exception);
@@ -97,18 +129,61 @@ namespace AvalonAssets.Core.Log
             private const int MinPadding = 0;
             private int _padding = 1;
             private int _width = 50;
-            public char BottomLeftCorner = '╚';
-            public char BottomRightCorner = '╝';
-            public char HorizontalInnerlWall = '─';
-            public char HorizontalOutterWall = '═';
-            public char LeftVerticalSplitter = '╟';
-            public char RightVerticalSplitter = '╢';
-            public char TopLeftCorner = '╔';
-            public char TopRightCorner = '╗';
-            public char VerticalOutterWall = '║';
-            public int TotalWidth => TotalInnerWidth + 2;
-            public int TotalInnerWidth => Width + Padding * 2;
 
+            /// <summary>
+            ///     Default is ╚.
+            /// </summary>
+            public char BottomLeftCorner = '╚';
+
+            /// <summary>
+            ///     Default is ╝.
+            /// </summary>
+            public char BottomRightCorner = '╝';
+
+            /// <summary>
+            ///     Default is ─.
+            /// </summary>
+            public char HorizontalInnerlWall = '─';
+
+            /// <summary>
+            ///     Default is ═.
+            /// </summary>
+            public char HorizontalOutterWall = '═';
+
+            /// <summary>
+            ///     Default is ╟.
+            /// </summary>
+            public char LeftVerticalSplitter = '╟';
+
+            /// <summary>
+            ///     Default is ╢.
+            /// </summary>
+            public char RightVerticalSplitter = '╢';
+
+            /// <summary>
+            ///     Default is ╔.
+            /// </summary>
+            public char TopLeftCorner = '╔';
+
+            /// <summary>
+            ///     Default is ╗.
+            /// </summary>
+            public char TopRightCorner = '╗';
+
+            /// <summary>
+            ///     Default is ║.
+            /// </summary>
+            public char VerticalOutterWall = '║';
+
+            internal int TotalWidth => TotalInnerWidth + 2;
+            internal int TotalInnerWidth => Width + Padding * 2;
+
+            /// <summary>
+            ///     The maximum width of a message. It wraps long message.
+            /// </summary>
+            /// <exception cref="ArgumentOutOfRangeException">
+            ///     Value less than 20.
+            /// </exception>
             public int Width
             {
                 get { return _width; }
@@ -120,6 +195,12 @@ namespace AvalonAssets.Core.Log
                 }
             }
 
+            /// <summary>
+            ///     Padding between the message and the frame.
+            /// </summary>
+            /// <exception cref="ArgumentOutOfRangeException">
+            ///     Value less than 0.
+            /// </exception>
             public int Padding
             {
                 get { return _padding; }
@@ -131,18 +212,18 @@ namespace AvalonAssets.Core.Log
                 }
             }
 
-            public string CreateRoof()
+            internal string CreateRoof()
             {
                 return $"{TopLeftCorner}{new string(HorizontalOutterWall, TotalInnerWidth)}{TopRightCorner}";
             }
 
-            public string CreateInnerWall()
+            internal string CreateInnerWall()
             {
                 return
                     $"{LeftVerticalSplitter}{new string(HorizontalInnerlWall, TotalInnerWidth)}{RightVerticalSplitter}";
             }
 
-            public IEnumerable<string> CreateEntries(string content)
+            internal IEnumerable<string> CreateEntries(string content)
             {
                 if (string.IsNullOrWhiteSpace(content))
                 {
@@ -156,7 +237,7 @@ namespace AvalonAssets.Core.Log
                 }
             }
 
-            public string CreateFloor()
+            internal string CreateFloor()
             {
                 return $"{BottomLeftCorner}{new string(HorizontalOutterWall, Width + Padding * 2)}{BottomRightCorner}";
             }

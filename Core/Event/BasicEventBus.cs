@@ -7,8 +7,11 @@ using AvalonAssets.Core.Event.EventHandler;
 namespace AvalonAssets.Core.Event
 {
     /// <summary>
-    ///     Basic implementation of <see cref="IEventBus" />.
+    ///     <see cref="BasicEventBus" /> is basic implementation of <see cref="IEventBus" />.
+    ///     It uses <see cref="IEventHandlerFactory" /> to create <see cref="IEventHandler" /> to wrap subscriber.
+    ///     <see cref="Builder" /> is needed for creating <see cref="BasicEventBus" />.
     /// </summary>
+    /// <see cref="Builder" />
     public class BasicEventBus : IEventBus
     {
         private readonly IEventHandlerFactory _eventHandlerFactory;
@@ -80,10 +83,20 @@ namespace AvalonAssets.Core.Event
             }
         }
 
+        /// <summary>
+        ///     <see cref="Builder" /> is a builder for <see cref="BasicEventBus" />.
+        /// </summary>
         public class Builder
         {
+            /// <summary>
+            ///     <see cref="IEventHandlerFactory" /> that will be used by <see cref="BasicEventBus" />.
+            /// </summary>
             public IEventHandlerFactory EventHandlerFactory { private get; set; }
 
+            /// <summary>
+            ///     Create a new instance of <see cref="BasicEventBus" />.
+            /// </summary>
+            /// <returns>A new instance of <see cref="BasicEventBus" />.</returns>
             public BasicEventBus Build()
             {
                 return new BasicEventBus(EventHandlerFactory ?? new ReflectEventHandlerFactory());

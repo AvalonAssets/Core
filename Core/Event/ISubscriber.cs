@@ -11,7 +11,7 @@
     }
 
     /// <summary>
-    ///     Subscribes to message type <typeparamref name="T" />.
+    ///     Subscriber need to implement <see cref="ISubscriber{T}" /> to subscribe to message type <typeparamref name="T" />.
     /// </summary>
     /// <typeparam name="T">Message type.</typeparam>
     /// <seealso cref="IEventBus" />

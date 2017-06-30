@@ -30,6 +30,7 @@ namespace AvalonAssets.Core.Event
         ///     <typeparamref name="T" /> or its super class.
         /// </summary>
         /// <param name="message">Message to be published.</param>
+        /// <typeparam name="T">Event type.</typeparam>
         void Publish<T>(T message) where T : IEvent;
     }
 }
